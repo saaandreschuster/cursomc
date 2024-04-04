@@ -2,8 +2,10 @@ package com.services;
 
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
+import com.services.exceptions.DataIntegrityException;
+import com.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.domain.Categoria;
@@ -18,11 +20,24 @@ public class CategoriaService {
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName(), obj));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getSimpleName()));
 	}
-	
-	public  Categoria insert(Categoria obj) {
+
+	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
-	}	
+	}
+
+	public Categoria update(Categoria obj) {
+		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		repo.findById(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos!");
+		}
+	}
 }

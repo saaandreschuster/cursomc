@@ -17,7 +17,7 @@ public class EstadoResources {
 	private EstadoService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Estado> find(@PathVariable Integer id) {
 		Estado obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
