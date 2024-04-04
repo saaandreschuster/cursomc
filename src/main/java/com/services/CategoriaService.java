@@ -1,5 +1,6 @@
 package com.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.services.exceptions.DataIntegrityException;
@@ -21,6 +22,11 @@ public class CategoriaService {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getSimpleName()));
+	}
+
+	public List<Categoria> findAll() {
+		List<Categoria> list = repo.findAll();
+		return list;
 	}
 
 	public Categoria insert(Categoria obj) {
