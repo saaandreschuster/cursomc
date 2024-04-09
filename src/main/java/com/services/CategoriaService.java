@@ -3,14 +3,17 @@ package com.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.services.exceptions.DataIntegrityException;
-import com.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.domain.Categoria;
 import com.repositories.CategoriaRepository;
+import com.services.exceptions.DataIntegrityException;
+import com.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -46,4 +49,10 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos!");
 		}
 	}
+	
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderby, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderby);
+		return repo.findAll(pageRequest);
+	}
+	
 }
