@@ -15,6 +15,8 @@ import com.repositories.CategoriaRepository;
 import com.services.exceptions.DataIntegrityException;
 import com.services.exceptions.ObjectNotFoundException;
 
+import dto.CategoriaDTO;
+
 @Service
 public class CategoriaService {
 
@@ -49,10 +51,13 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos!");
 		}
 	}
-	
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderby, String direction){
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderby);
+
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderby, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderby);
 		return repo.findAll(pageRequest);
 	}
-	
+
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
 }
