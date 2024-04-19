@@ -22,6 +22,7 @@ import com.domain.Cliente;
 import com.services.ClienteService;
 
 import dto.ClienteDTO;
+import dto.ClienteNewDTO;
 import jakarta.validation.Valid;
 
 @RestController
@@ -54,7 +55,7 @@ public class ClienteResources {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
