@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.domain.Categoria;
-import com.domain.Cliente;
 import com.repositories.CategoriaRepository;
 import com.services.exceptions.DataIntegrityException;
 import com.services.exceptions.ObjectNotFoundException;

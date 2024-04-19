@@ -3,7 +3,6 @@ package com.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -19,6 +18,7 @@ import com.repositories.CidadeRepository;
 import com.repositories.ClienteRepository;
 import com.repositories.EnderecoRepository;
 import com.services.exceptions.DataIntegrityException;
+import com.services.exceptions.ObjectNotFoundException;
 
 import dto.ClienteDTO;
 import dto.ClienteNewDTO;
@@ -39,7 +39,7 @@ public class ClienteService {
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName(), obj));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 
 	public List<Cliente> findAll() {

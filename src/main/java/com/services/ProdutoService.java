@@ -2,13 +2,12 @@ package com.services;
 
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.domain.Categoria;
 import com.domain.Produto;
 import com.repositories.ProdutoRepository;
+import com.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
@@ -19,7 +18,7 @@ public class ProdutoService {
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName(), obj));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
 
 }
