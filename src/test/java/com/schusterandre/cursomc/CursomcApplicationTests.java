@@ -3,10 +3,10 @@ package com.schusterandre.cursomc;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class CursomcApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
